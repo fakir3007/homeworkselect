@@ -9,37 +9,37 @@ connection = engine.connect()
 print(connection)
 pprint(engine.table_names())
 
-#1.Название и год выхода альбомов, вышедших в 2018 году
+#1.РќР°Р·РІР°РЅРёРµ Рё РіРѕРґ РІС‹С…РѕРґР° Р°Р»СЊР±РѕРјРѕРІ, РІС‹С€РµРґС€РёС… РІ 2018 РіРѕРґСѓ
 select_1 = connection.execute('''SELECT  name, releasedate FROM albums
 WHERE releasedate BETWEEN '2018-01-01' AND '2018-12-31';
 ''').fetchall()
 pprint(select_1)
 
-#2.Название и продолжительность самого длительного трека
+#2.РќР°Р·РІР°РЅРёРµ Рё РїСЂРѕРґРѕР»Р¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ СЃР°РјРѕРіРѕ РґР»РёС‚РµР»СЊРЅРѕРіРѕ С‚СЂРµРєР°
 select_2 = connection.execute('''SELECT   name, tracklength FROM tracks
 ORDER BY tracklength DESC;
 ''').fetchone()
 pprint(select_2)
 
-#3.Название треков, продолжительность которых не менее 3,5 минуты
+#3.РќР°Р·РІР°РЅРёРµ С‚СЂРµРєРѕРІ, РїСЂРѕРґРѕР»Р¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ РєРѕС‚РѕСЂС‹С… РЅРµ РјРµРЅРµРµ 3,5 РјРёРЅСѓС‚С‹
 select_3 = connection.execute('''SELECT  name FROM tracks
 WHERE tracklength >= 03.50;
 ''').fetchall()
 pprint(select_3)
 
-#4.Названия сборников, вышедших в период с 2018 по 2020 год включительно
+#4.РќР°Р·РІР°РЅРёСЏ СЃР±РѕСЂРЅРёРєРѕРІ, РІС‹С€РµРґС€РёС… РІ РїРµСЂРёРѕРґ СЃ 2018 РїРѕ 2020 РіРѕРґ РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ
 select_4 = connection.execute('''SELECT name FROM compilation
 WHERE release_year BETWEEN '2018-01-01' AND '2020-12-31';
 ''').fetchall()
 pprint(select_4)
 
-#5.Исполнители, чье имя состоит из 1 слова
+#5.РСЃРїРѕР»РЅРёС‚РµР»Рё, С‡СЊРµ РёРјСЏ СЃРѕСЃС‚РѕРёС‚ РёР· 1 СЃР»РѕРІР°
 select_5 = connection.execute('''SELECT name FROM perfomers
 WHERE name NOT LIKE '%% %%';
 ''').fetchall()
 pprint(select_5)
 
-#6.Название треков, которые содержат слово "мой"/"my"
+#6.РќР°Р·РІР°РЅРёРµ С‚СЂРµРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ СЃРѕРґРµСЂР¶Р°С‚ СЃР»РѕРІРѕ "РјРѕР№"/"my"
 select_6 = connection.execute('''SELECT name FROM tracks
 WHERE name LIKE '%%my%%';
 ''').fetchall()
